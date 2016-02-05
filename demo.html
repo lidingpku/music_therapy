@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <!--
+    版本说明：
+  *  2016-02-05-a: 初始化建立任务
+  -->
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+	<link rel="stylesheet" type="text/css" href="http://7xipnx.com2.z0.glb.qiniucdn.com/bootstrap3.min.css">
+	<title>demo</title>
+  <script src="http://7xipnx.com2.z0.glb.qiniucdn.com/jquery.min.js"></script>
+  <script >
+  function getSelectedOptionValue(qid){
+    var x = document.getElementsByName(qid)
+    for(var k=0;k<x.length;k++)
+    if(x[k].checked){
+      //alert('Option selected: ' + x[k].value)
+      return x[k].value;
+    }
+    return 0;
+  }
+
+  function action() {
+  //  alert("你好");
+    var sum = 0;
+    var questions = ["q9", "q11"];
+    var xqname = {"q1":"第一个问题","q9":"第9个问题", "q11":"第11个问题"};
+    for (q in questions){
+        var qid = questions[q];
+
+        var value = getSelectedOptionValue(qid);
+        if (value>0){
+          sum += parseInt(value) ;
+        }else{
+          var msg = xqname[qid];
+          alert("缺少"+msg);
+          return;
+        }
+    }
+
+
+  //  alert(sum);
+
+    if (sum>5){
+      message = "请您欣赏摇滚音乐";
+      url = "http://audio.xmcdn.com/group11/M07/62/F0/wKgDbVXKE1XCVqXpABtwJ6t4pXM124.m4a";
+    }else{
+      message = "请您欣赏古典音乐";
+      url = "http://audio.xmcdn.com/group7/M08/45/AC/wKgDWlWmff2SrWuxAA-n5e8Eix0999.m4a";
+    }
+    document.getElementById("message").innerHTML =message;
+    document.getElementById("myaudio").setAttribute("src", url);
+    document.getElementById("myaudio").play();
+  //  $("#myaudio").trigger('play');
+
+ }
+  </script>
+
+</head>
+<body>
+
+<h1>心理测试</h1>
+
+<!--
+<div class="span12 clearfix card-box" >
+  1我感到心情平静：
+  <select id="q1">
+    <option value="1" >完全没有</option>
+    <option value="2" >有些</option>
+    <option value="3">中等程度</option>
+    <option value="4">非常明显</option>
+  </select>
+</div>
+
+<div class="span12 clearfix card-box"  >
+  9我感到害怕：
+  <select id="q9">
+    <option value="4" >完全没有</option>
+    <option value="2">有些</option>
+    <option value="3"  >中等程度</option>
+    <option value="1">非常明显</option>
+  </select>
+</div>
+-->
+<div class="span12 clearfix card-box"  >
+  9我感到害怕：
+    <input name="q9" type="radio" value=4 />完全没有
+    <input name="q9" type="radio" value=3 />有些
+    <input name="q9" type="radio" value=1 />中等程度
+    <input name="q9" type="radio" value=2 />非常明显
+</div>
+
+<div class="span12 clearfix card-box"  >
+  11我有自信心：
+    <input name="q11" type="radio" value=4 />完全没有
+    <input name="q11" type="radio" value=3 />有些
+    <input name="q11" type="radio" value=1 />中等程度
+    <input name="q11" type="radio" value=2 />非常明显
+</div>
+
+<div class="span12 clearfix card-box" style="padding:10px;">
+  <div style="margin-bottom:10px;">
+   <span id="message"></span>
+  </div>
+  <div>
+    <audio id="myaudio" src="" autoplay controls></audio>
+  </div>
+
+<!-- <iframe height="230" width="260" src="http://www.ximalaya.com/swf/album/red.swf?id={{ximalaya_id}}&auto=true" frameborder=0 allowfullscreen></iframe> -->
+<!-- 						<object type="application/x-shockwave-flash" id="ximalaya_player" data="http://www.ximalaya.com/swf/album/red.swf?id={{ximalaya_id}}&auto=true" width="260" height="70"></object>	-->
+
+</div>
+
+
+<button type="button" class="btn btn-success" onclick='action();'>提交</button>
+
+
+</body>
+</html>
